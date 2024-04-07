@@ -1,40 +1,5 @@
-<<<<<<< Updated upstream
 #include <stdio.h>
-=======
-#include<stdio.h>
-int main()
-{
-    int i, days_in_month=31;//April -30 days
-    int first=0;// 0=mon
-    int day;
-    printf("************************CALENDAR *******************************\n");
-    printf("");
-    printf("                       APRIL 2024                               ");
-    printf("     MON     TUE     WED     THU     FRI     SAT     SUN\n");
-
-    //spaces for extra num
-    for(i=0;i<first;i++)
-    {
-        printf("");
-    }
-    //days of month
-    for(day=0;day<=days_in_month;i++)
-    {
-       printf("%3d",day);
-       first++;
-
-       //New line on Sun
-       if(first % 7==0)
-       {
-        printf("\n");
-       }
-    }
-   
-    printf("\n");
-return 0;
-}
->>>>>>> Stashed changes
-
+/*
 int main() {
     int i, day;
     int days_in_month = 30; // April has 30 days
@@ -61,4 +26,6 @@ int main() {
     printf("\n");
 
     return 0;
-}
+}*/
+
+
