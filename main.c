@@ -1,31 +1,35 @@
 #include <stdio.h>
-/*
-int main() {
-    int i, day;
-    int days_in_month = 30; // April has 30 days
-    int starting_day = 6;   // April 1st, 2024 is a Saturday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+#include <time.h>
 
-    printf("  April 2024\n");
-    printf(" Su Mo Tu We Th Fr Sa\n");
+// Function to print the calendar for a given month and year
+void printCalendar(int year, int month) {
+    struct tm timeinfo = { .tm_year = year - 1900, .tm_mon = month - 1, .tm_mday = 1 };
+    mktime(&timeinfo); // Get day of the week for the first day of the month
 
-    // Print leading spaces if the month doesn't start on a Sunday
-    for (i = 0; i < starting_day; i++) {
-        printf("   ");
-    }
-
-    // Print the days of the month
-    for (day = 1; day <= days_in_month; day++) {
-        printf("%3d", day);
-        starting_day++;
-        // If it's Saturday, start a new line
-        if (starting_day % 7 == 0) {
+    printf("   April %d\n", year);
+    printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+	int i;
+    int dayOfWeek = timeinfo.tm_wday;
+    for (i = 0; i < dayOfWeek; i++)
+        printf("    ");
+	int day;
+    int daysInMonth = 31; // April always has 30 days
+    for (day = 1; day <= daysInMonth; day++) {
+        printf("%4d", day);
+        if (++dayOfWeek > 6) {
+            dayOfWeek = 0;
             printf("\n");
         }
     }
+   /* if (dayOfWeek != 0) // Print newline if the last week is not complete
+        printf("\n");*/
+}
 
-    printf("\n");
+int main() {
+    int year = 2024;
+    int month =8; // April
+
+    printCalendar(year, month);
 
     return 0;
-}*/
-
-
+}
