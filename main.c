@@ -28,7 +28,7 @@ void printCalendar(int year, int month)    {
     }
 
 int main() {
-    int year = 2024;
+    int year;
     int month;
     int select;
     //int daysInMonth;
@@ -145,13 +145,106 @@ int main() {
 
     }
 
-    //case 3:
+    case 3:
 
+    printf("Enter Year:\n");
+    scanf("%d",&year);
+
+    printf("Enter The month of the calender:\n");
+    scanf("%d",&month);
+
+    switch(month) // month selection
+    {
+        case 1:
+        printf("   January %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=31;
+        printCalendar(year, month);
+        break;
+
+        case 2:
+        printf("   February %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=29;
+        printCalendar(year, month);
+        break;
+
+        case 3:
+        printf("   March %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=31;
+        printCalendar(year, month);
+        break;
+
+        case 4:
+        printf("   April %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=30;
+        printCalendar(year, month);
+        break;
+
+        case 5:
+        printf("   May %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=31;
+        printCalendar(year, month);
+        break;
+
+        case 6:
+        printf("   June %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=30;
+        printCalendar(year, month);
+        break;
+
+        case 7:
+        printf("   July %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=31;
+        printCalendar(year, month);
+        break;
+
+        case 8:
+        printf("   August %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=31;
+        printCalendar(year, month);
+        break;
+
+        case 9:
+        printf("   September %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=30;
+        printCalendar(year, month);
+        break;
+
+        case 10:
+        printf("   October %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=31;
+        printCalendar(year, month);
+        break;
+
+        case 11:
+        printf("   November %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=30;
+        printCalendar(year, month);
+        break;
+
+        case 12:
+        printf("   December %d\n", year);
+        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        daysInMonth=31;
+        printCalendar(year, month);
+        break;
+    }
 
    // case 4: 
-    }
+    
 
   // printCalendar(year, month);
 
     return 0;
+}
 }
