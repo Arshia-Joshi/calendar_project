@@ -2,9 +2,9 @@
 #include <windows.h>
 #include <time.h>
 int daysInMonth;
-//int month;
+
 // Function to print the calendar for a given month and year
-void printCalendar(int year, int month)    {
+void printCalendar(int year, int month,int curday)    {
     struct tm timeinfo = { .tm_year = year - 1900, .tm_mon = month - 1, .tm_mday = 1 };
     mktime(&timeinfo); // Get day of the week for the first day of the month
 
@@ -15,7 +15,10 @@ void printCalendar(int year, int month)    {
 	int day;
 
    for (day = 1; day <= daysInMonth; day++) {
+        if(curday==day)
+            printf("\x1b[31m");// text colour to red for present date*/
         printf("%4d", day);
+        printf("\x1b[0m");//reset colour*/
         if (++dayOfWeek > 6) {
             dayOfWeek = 0;
             printf("\n");
@@ -25,15 +28,16 @@ void printCalendar(int year, int month)    {
         printf("\n");
     }
 
+
 int main() {
+    int day;
     int year;
     int month;
     int select;
     int yearnow=2024;
-    //int daysInMonth;
-   /* struct tm timeinfo1 = { .tm_year = year - 1900, .tm_mday = 1 };
-    mktime(&timeinfo1); // Get day of the week for the first day of the month
-    */
+    char case_month[12]; 
+
+
    struct SYS {
 		WORD wYear;
 		WORD wMonth;
@@ -45,115 +49,102 @@ int main() {
 		WORD wMilliseconds;
 	} str_t;
     
-    //GetSystemTime(&str_t);
-    //printf("Month Number: %d",str_t.wMonth);
-    /*printf("   April %d\n", year);*/
-    /*printf(" Sun Mon Tue Wed Thu Fri Sat\n");*/
-	/*int i;
-    int dayOfWeek = timeinfo.tm_wday;
 
-*/
-    printf("\nPlease Select One Choice From The Following:\n1.Display Current day calendar\n2.Select The calendar for the Month of Your choice\n3.Select the Calendar for the Year of Your Choice\n4.Add Event to a certain date");
+    printf("\nPlease Select One Choice From The Following:\n1.Display Current day calendar\n2.Select The calendar for the Month of Your choice\n3.Select the Calendar for the Year of Your Choice\n");
     printf("\nEnter your choice:");
     scanf("%d",&select);
 
-   /* printf("Enter The month of the calender:\n");
-    scanf("%d",&month);*/
    
     switch(select)//choice selection
     {
 
    case 1:
-    //int yearnow=2024
+   
     GetSystemTime(&str_t);
-    //printf("Month Number: %d",str_t.wMonth);
+
     switch(str_t.wMonth)
     {
         case 1:
-        printf("   January %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "January");
         daysInMonth=31;
-        printCalendar(str_t.wYear,month);
+        
         break;
 
         case 2:
-        printf("   February %d\n",yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "February");
         daysInMonth=29;
-        printCalendar(str_t.wYear,month);
+     
         break;
 
         case 3:
-        printf("   March %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "March");
         daysInMonth=31;
-        printCalendar(str_t.wYear,month);
+       
         break;
 
         case 4:
-        printf("   April %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        
+        strcpy (case_month, "April");
         daysInMonth=30;
-        printCalendar(str_t.wYear,month);
+
         break;
 
         case 5:
-        printf("   May %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "May");
         daysInMonth=31;
-        printCalendar(str_t.wYear,month);
+        
         break;
 
         case 6:
-        printf("   June %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "June");
         daysInMonth=30;
-        printCalendar(str_t.wYear,month);
+        
         break;
 
         case 7:
-        printf("   July %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "July");
         daysInMonth=31;
-        printCalendar(str_t.wYear,month);
+        
         break;
 
         case 8:
-        printf("   August %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "August");
         daysInMonth=31;
-        printCalendar(str_t.wYear,month);
+        
         break;
 
         case 9:
-        printf("   September %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "September");
         daysInMonth=30;
-        printCalendar(str_t.wYear,month);
+        
         break;
 
         case 10:
-        printf("   October %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "Otober");
         daysInMonth=31;
-        printCalendar(str_t.wYear,month);
+        
         break;
 
         case 11:
-        printf("   November %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "November");
         daysInMonth=30;
-        printCalendar(str_t.wYear,month);
+        
         break;
 
         case 12:
-        printf("   December %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "December");
         daysInMonth=31;
-        printCalendar(str_t.wYear,month);
+        
         break;
     
     }
+    printf("\033[1;31m");
+    printf("           %s \n", case_month, " %d\n", yearnow);
+    printf("\033[0m");
+    printf("\033[0;35m");
+    printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+    printf("\033[0m");
+    printCalendar(yearnow,str_t.wMonth,str_t.wDay);
     break;
 
     case 2:
@@ -163,91 +154,76 @@ int main() {
     switch(month) // month selection
     {
         case 1:
-        printf("   January %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "January");
         daysInMonth=31;
-        printCalendar(yearnow, month);
         break;
 
         case 2:
-        printf("   February %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "February");
         daysInMonth=29;
-        printCalendar(yearnow, month);
         break;
 
         case 3:
-        printf("   March %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "March");
         daysInMonth=31;
-        printCalendar(yearnow, month);
         break;
 
         case 4:
-        printf("   April %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "April");
         daysInMonth=30;
-        printCalendar(yearnow, month);
         break;
 
         case 5:
-        printf("   May %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "May");
         daysInMonth=31;
-        printCalendar(yearnow, month);
         break;
 
         case 6:
-        printf("   June %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "June");
         daysInMonth=30;
-        printCalendar(yearnow, month);
         break;
 
         case 7:
-        printf("   July %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "July");
         daysInMonth=31;
-        printCalendar(yearnow, month);
         break;
 
         case 8:
-        printf("   August %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "August");
         daysInMonth=31;
-        printCalendar(yearnow, month);
         break;
 
         case 9:
-        printf("   September %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "September");
         daysInMonth=30;
-        printCalendar(yearnow, month);
         break;
 
         case 10:
-        printf("   October %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "October");
         daysInMonth=31;
-        printCalendar(yearnow, month);
         break;
 
         case 11:
-        printf("   November %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "November");
         daysInMonth=30;
-        printCalendar(yearnow, month);
         break;
 
         case 12:
-        printf("   December %d\n", yearnow);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "December");
         daysInMonth=31;
-        printCalendar(yearnow, month);
+
         break;
     
     }
+    printf("\033[1;31m");
+    printf("           %s \n", case_month, " %d\n", yearnow);
+    printf("\033[0m");
+    printf("\033[0;35m");
+    printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+    printf("\033[0m");
+    printCalendar(yearnow,month,str_t.wDay);
     break;
+
     case 3:
 
     printf("Enter Year:\n");
@@ -259,95 +235,85 @@ int main() {
     switch(month) // month selection
     {
         case 1:
-        printf("   January %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "January");
         daysInMonth=31;
-        printCalendar(year, month);
         break;
 
         case 2:
-        printf("   February %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
-        daysInMonth=29;
-        printCalendar(year, month);
+        strcpy (case_month, "February");
+        if (year % 400 == 0){ //divisible by 400 (leap year)
+             daysInMonth=29;
+        }
+        else if(year % 100 == 0){ // not divisible by 100 (not leap year)
+             daysInMonth=28;
+        }
+        else if( year % 4 == 0){ //
+            daysInMonth=29;
+        }
+        else{
+            daysInMonth=28;
+        }
         break;
 
         case 3:
-        printf("   March %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "March");
         daysInMonth=31;
-        printCalendar(year, month);
         break;
 
         case 4:
-        printf("   April %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "April");
         daysInMonth=30;
-        printCalendar(year, month);
         break;
 
         case 5:
-        printf("   May %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "May");
         daysInMonth=31;
-        printCalendar(year, month);
         break;
 
         case 6:
-        printf("   June %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "June");
         daysInMonth=30;
-        printCalendar(year, month);
         break;
 
         case 7:
-        printf("   July %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "July");
         daysInMonth=31;
-        printCalendar(year, month);
         break;
 
         case 8:
-        printf("   August %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "August");
         daysInMonth=31;
-        printCalendar(year, month);
         break;
 
         case 9:
-        printf("   September %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "September");
         daysInMonth=30;
-        printCalendar(year, month);
         break;
 
         case 10:
-        printf("   October %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "October");
         daysInMonth=31;
-        printCalendar(year, month);
         break;
 
         case 11:
-        printf("   November %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "November");
         daysInMonth=30;
-        printCalendar(year, month);
         break;
 
         case 12:
-        printf("   December %d\n", year);
-        printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+        strcpy (case_month, "December");
         daysInMonth=31;
-        printCalendar(year, month);
         break;
     
     }
+    printf("\033[1;31m");
+    printf("           %s \n", case_month, " %d\n", year);
+    printf("\033[0m");
+    printf("\033[0;35m");
+    printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+    printf("\033[0m");
+    printCalendar(year,month,str_t.wDay);
     break;
-   // case 4: 
-    
-
-  // printCalendar(year, month);
 
     return 0;
 }
